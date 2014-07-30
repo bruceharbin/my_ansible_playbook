@@ -1,0 +1,17 @@
+---
+- hosts: mywindows
+  tasks:
+
+    - name: Download python 
+      win_get_url:
+        url: 'https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi'
+        dest: 'C:\Users\Vagrant\desktop\python.msi'
+      register: download_python
+
+    - debug: var=download_python
+
+    - name: install python 
+      win_msi: path='C:\Users\Vagrant\desktop\python.msi'
+      register: install_python
+
+    - debug: var=install_python

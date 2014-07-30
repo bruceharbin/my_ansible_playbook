@@ -1,0 +1,35 @@
+--- 
+- hosts: mylinux
+  vars_prompt:
+    - name: "my_name"
+      prompt: "Enter Your Name"
+      private: no
+  
+    - name: "my_email"
+      prompt: "Enter Your Email"
+      private: no
+
+  tasks:
+
+    - name: git config name
+      shell: git config --global user.name "{{my_name}}"
+
+    - name: git config email
+      shell: git config --global user.email "{{my_email}}"
+
+    - name: show git config
+      shell: git config --list
+      register: git_config_result
+    
+    - debug: var=git_config_result
+
+    - name: generate ssh key
+      command: 'ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa'
+      args:
+        creates: ~/.ssh/id_rsa.pub
+
+    - name: show the public key
+      shell: cat ~/.ssh/id_rsa.pub
+      register: cat_public_key
+
+    - debug: var=cat_public_key
