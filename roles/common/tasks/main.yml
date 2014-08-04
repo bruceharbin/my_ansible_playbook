@@ -1,0 +1,9 @@
+---
+
+- name: apt install
+  sudo: yes
+  apt:
+    name='{{item}}'
+    state=latest
+  with_items:
+    - tree
