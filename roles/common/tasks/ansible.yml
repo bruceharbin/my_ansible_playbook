@@ -1,0 +1,16 @@
+- name: change ansible config
+  sudo: yes
+  lineinfile: 
+    dest=/etc/ansible/ansible.cfg
+    regexp='^\#log_path\s=\s\/var\/log\/ansible\.log$'
+    line='log_path = /var/log/ansible.log'
+    backrefs=yes
+  register: ansible_config
+
+- name: touch var log ansible.log file
+  sudo: yes
+  file:
+    path=/var/log/ansible.log
+    state=touch
+    mode=0666
+  when: ansible_config|changed
