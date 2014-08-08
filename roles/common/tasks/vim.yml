@@ -1,4 +1,9 @@
 ---
+- name: install vim
+  sudo: yes
+  apt: 
+    name=vim
+    state=latest
 
 - name: download Vundle
   git:

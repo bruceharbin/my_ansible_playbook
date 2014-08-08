@@ -1,3 +1,9 @@
+- name: install ansible
+  sudo: yes
+  apt: 
+    name=ansible
+    state=latest
+
 - name: change ansible config
   sudo: yes
   lineinfile: 

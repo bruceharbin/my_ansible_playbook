@@ -1,0 +1,4 @@
+---
+
+- include: pre_windows.yml
+- include: config_windows.yml

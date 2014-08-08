@@ -1,0 +1,8 @@
+---
+- name: install pywinrm
+  sudo: yes
+  pip: 
+    name='http://github.com/diyan/pywinrm/archive/master.zip#egg=pywinrm' 
+  register: install_pywinrm
+
+- debug: var=install_pywinrm
