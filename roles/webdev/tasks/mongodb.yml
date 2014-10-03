@@ -1,0 +1,27 @@
+- name: import MongoDB public GPG key
+  sudo: yes
+  apt_key:
+    keyserver='hkp://keyserver.ubuntu.com:80'
+    id='7F0CEB10'
+
+- name: create mongodb.list file
+  sudo: yes
+  lineinfile:
+    dest="/etc/apt/sources.list.d/mongodb.list"
+    line="{{item}}"
+    backup=yes
+    create=yes
+    state=present
+  with_items:
+    - 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
+
+- name: reload local package database
+  sudo: yes
+  apt:
+    update_cache=yes
+
+- name: install latest mongodb
+  sudo: yes
+  apt:
+    name='mongodb-org'
+    state=latest

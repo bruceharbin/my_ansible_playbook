@@ -4,6 +4,31 @@
     name=ansible
     state=latest
 
+#- name: download latest ansible from github
+#  git:
+#    repo='git://github.com/ansible/ansible.git'
+#    dest="{{ansible_env.HOME}}/my_temp/latest_ansible"
+
+- name: latest ansible from PPA 1
+  sudo: yes
+  apt:
+    name="{{item}}"
+    state=latest
+  with_items:
+    - software-properties-common
+    - python-pycurl
+
+- name: latest ansible from PPA 2
+  sudo: yes
+  apt_repository:
+    repo='ppa:ansible/ansible'
+
+- name: latest ansible from PPA 3
+  sudo: yes
+  apt:
+    update_cache=yes
+
+
 - name: change ansible config
   sudo: yes
   lineinfile: 

@@ -1,5 +1,7 @@
 ---
 
+- include: mongodb.yml
+
 - name: install django webdev packages
   sudo: yes
   pip: 
