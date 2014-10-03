@@ -1,0 +1,17 @@
+- name: install docker.io 
+  sudo: yes
+  apt:
+    name='docker.io'
+    state=latest
+  register: install_docker
+
+- name: ln docker.io
+  sudo: yes
+  shell: ln -sf /usr/bin/docker.io /usr/local/bin/docker
+  when: install_docker|changed
+
+
+- name: update docker etc
+  sudo: yes
+  shell: 'sed -i ''$acomplete -F _docker docker'' /etc/bash_completion.d/docker.io'
+  when: install_docker|changed

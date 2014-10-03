@@ -1,0 +1,80 @@
+---
+
+- name: install django webdev packages
+  sudo: yes
+  pip: 
+    name='{{item}}'
+  with_items:
+    - Django
+    - authomatic
+    - python-openid
+    - gunicorn 
+    - dj-database-url
+    - dj-static
+    - South
+    - markdown
+    - coverage
+    - django-jenkins
+
+- name: apt install
+  sudo: yes
+  apt:
+    name='{{item}}'
+    state=latest
+  with_items:
+    - sqlite3
+    - pylint
+
+
+# nodejs
+- name: install nodejs
+  sudo: yes
+  apt:
+    name=nodejs
+    state=latest
+  register: install_nodejs
+
+- name: ln nodejs node
+  sudo: yes
+  file:
+    src=/usr/bin/nodejs
+    dest=/usr/local/bin/node
+    state=link
+  when: install_nodejs|changed
+
+
+# npm
+- name: install npm
+  sudo: yes
+  apt: 
+    name=npm
+    state=latest
+  register: install_npm
+
+- name: create node_modules directory
+  sudo: yes
+  file:
+    path=/usr/local/lib/node_modules
+    state=directory
+  when: install_npm|changed
+
+- name: set NODE_PATH
+  lineinfile:
+    dest={{ansible_env.HOME}}/.bashrc
+    backup=yes
+    create=yes
+    state=present
+    line='export NODE_PATH=/usr/local/lib/node_modules'
+  when: install_npm|changed
+
+- name: npm packages
+  sudo: yes
+  npm: 
+    name='{{item}}'
+    global=yes
+  with_items:
+    - bower
+
+
+
+

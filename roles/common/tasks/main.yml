@@ -1,0 +1,28 @@
+---
+- include: updates.yml
+
+- name: apt install
+  sudo: yes
+  apt:
+    name='{{item}}'
+    state=latest
+  with_items:
+    - tree
+    - git
+    - python-pip
+    - lftp
+
+- name: create my_temp directory
+  file: 
+    path={{ansible_env.HOME}}/my_temp
+    state=directory
+
+- name: create my_linux directory
+  file:
+    path={{ansible_env.HOME}}/my_linux
+    state=directory
+
+
+- include: vim.yml
+- include: ansible.yml
+- include: docker.yml
