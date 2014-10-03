@@ -8,9 +8,12 @@
     state=latest
   with_items:
     - tree
+<<<<<<< HEAD
     - git
     - python-pip
     - lftp
+=======
+>>>>>>> 83e501318596503944e28802df3a6ba9cfb0798d
 
 - name: create my_temp directory
   file: 
