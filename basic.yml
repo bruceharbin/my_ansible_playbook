@@ -1,3 +1,4 @@
+
 - hosts: mylinux
   roles:
     - common
