@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 83e501318596503944e28802df3a6ba9cfb0798d
 - hosts: mylinux
   roles:
     - common
