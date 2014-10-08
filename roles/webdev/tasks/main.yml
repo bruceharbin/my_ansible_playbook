@@ -26,6 +26,7 @@
   with_items:
     - sqlite3
     - pylint
+    - chromium-browser
 
 
 # nodejs
@@ -76,7 +77,6 @@
     global=yes
   with_items:
     - bower
-
-
-
-
+    - grunt-cli
+    - go
+    - generator-meanjs
