@@ -26,3 +26,4 @@
 - include: vim.yml
 - include: ansible.yml
 - include: docker.yml
+- include: smb.yml

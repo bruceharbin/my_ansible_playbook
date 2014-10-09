@@ -1,0 +1,5 @@
+- name: install smbfs or cifs  
+  sudo: yes
+  apt:
+    name=cifs-utils 
+    state=latest
